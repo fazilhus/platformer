@@ -10,8 +10,9 @@ var health
 
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
-@onready var anim_player = get_node("AnimationPlayer")
-@onready var anim_sprite_2d = get_node("AnimatedSprite2D")
+@onready var anim_player = $AnimationPlayer
+@onready var anim_sprite_2d = $AnimatedSprite2D
+@onready var coyote_jump_timer = $CoyoteJumpTimer
 
 
 func _ready():
@@ -44,13 +45,16 @@ func _physics_process(delta):
 	handle_horizontal_acceleration(delta, dir)
 	apply_friction(delta, dir)
 	
+	var was_on_floor = is_on_floor()
 	move_and_slide()
+	if was_on_floor and not is_on_floor() and self.velocity.y >= 0:
+		coyote_jump_timer.start()
 
 func handle_jump():
-	if is_on_floor():
+	if is_on_floor() or coyote_jump_timer.time_left > 0.0:
 		if Input.is_action_just_pressed("jump"):
 			self.velocity.y = JUMP_VELOCITY
-	else:
+	if not is_on_floor():
 		if Input.is_action_just_released("jump") and self.velocity.y < JUMP_VELOCITY / 2:
 			self.velocity.y = JUMP_VELOCITY / 2
 
