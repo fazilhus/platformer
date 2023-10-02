@@ -1,10 +1,7 @@
 extends CharacterBody2D
 
-const SPEED = 150.0
-const ACCELERATION = 1000.0
-const FRICTION = 1200.0
-const JUMP_VELOCITY = -300.0
-const MAX_HEALTH = 10
+@export var movement_data : PlayerMovementData
+@export var MAX_HEALTH = 10
 
 var health
 
@@ -53,22 +50,25 @@ func _physics_process(delta):
 func handle_jump():
 	if is_on_floor() or coyote_jump_timer.time_left > 0.0:
 		if Input.is_action_just_pressed("jump"):
-			self.velocity.y = JUMP_VELOCITY
+			self.velocity.y = movement_data.jump_velocity
 	if not is_on_floor():
-		if Input.is_action_just_released("jump") and self.velocity.y < JUMP_VELOCITY / 2:
-			self.velocity.y = JUMP_VELOCITY / 2
+		if Input.is_action_just_released("jump") and self.velocity.y < movement_data.jump_velocity / 2:
+			self.velocity.y = movement_data.jump_velocity / 2
 
 
 func apply_gravity(delta):
 	if not is_on_floor():
-		self.velocity.y += gravity * delta
+		self.velocity.y += gravity * movement_data.gravity_scale * delta
 
 
 func handle_horizontal_acceleration(delta, input_axis):
 	if input_axis:
-		self.velocity.x = move_toward(self.velocity.x, SPEED * input_axis, ACCELERATION * delta)
+		self.velocity.x = move_toward(self.velocity.x, movement_data.speed * input_axis, movement_data.acceleration * delta)
 
 
 func apply_friction(delta, input_axis):
-	if not input_axis and is_on_floor():
-		self.velocity.x = move_toward(self.velocity.x, 0, FRICTION * delta)
+	if not input_axis:
+		if is_on_floor():
+			self.velocity.x = move_toward(self.velocity.x, 0, movement_data.friction * delta)
+		else:
+			self.velocity.x = move_toward(self.velocity.x, 0, movement_data.air_resistance * delta)
