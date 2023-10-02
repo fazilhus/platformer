@@ -1,0 +1,59 @@
+[gd_scene load_steps=6 format=3 uid="uid://cy7ak5l22ajs8"]
+
+[ext_resource type="Script" path="res://scripts/menu.gd" id="1_wkd0k"]
+[ext_resource type="Script" path="res://scripts/parallax_background.gd" id="2_wsgf2"]
+[ext_resource type="Texture2D" uid="uid://dfeeo88vcp468" path="res://art/background/background_layer_1.png" id="3_wi674"]
+[ext_resource type="Texture2D" uid="uid://cpedxrntm7oyp" path="res://art/background/background_layer_2.png" id="4_5apw4"]
+[ext_resource type="Texture2D" uid="uid://dofnkbj2bsq14" path="res://art/background/background_layer_3.png" id="5_1230i"]
+
+[node name="Menu" type="Node2D"]
+script = ExtResource("1_wkd0k")
+
+[node name="ParallaxBackground" type="ParallaxBackground" parent="."]
+script = ExtResource("2_wsgf2")
+
+[node name="ParallaxLayer" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_scale = Vector2(0.3, 0.3)
+motion_mirroring = Vector2(640, 0)
+
+[node name="BackgroundLayer1" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer"]
+position = Vector2(2.72848e-12, 0)
+scale = Vector2(2, 2)
+texture = ExtResource("3_wi674")
+centered = false
+
+[node name="ParallaxLayer2" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_scale = Vector2(0.6, 0.6)
+motion_mirroring = Vector2(640, 0)
+
+[node name="BackgroundLayer2" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer2"]
+position = Vector2(6.10352e-05, 3.05176e-05)
+scale = Vector2(2, 2)
+texture = ExtResource("4_5apw4")
+centered = false
+
+[node name="ParallaxLayer3" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_scale = Vector2(0.9, 0.9)
+motion_mirroring = Vector2(640, 0)
+
+[node name="BackgroundLayer3" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer3"]
+scale = Vector2(2, 2)
+texture = ExtResource("5_1230i")
+centered = false
+
+[node name="PlayButton" type="Button" parent="."]
+offset_left = 192.0
+offset_top = 128.0
+offset_right = 448.0
+offset_bottom = 168.0
+text = "Play"
+
+[node name="QuitButton" type="Button" parent="."]
+offset_left = 192.0
+offset_top = 192.0
+offset_right = 448.0
+offset_bottom = 232.0
+text = "Quit"
+
+[connection signal="pressed" from="PlayButton" to="." method="_on_play_button_pressed"]
+[connection signal="pressed" from="QuitButton" to="." method="_on_quit_button_pressed"]
