@@ -100,4 +100,5 @@ func apply_friction(delta, input_axis):
 func _on_hazard_detection_area_entered(area):
 	if area.name == "HazardArea":
 		# TODO Health component
-		get_tree().change_scene_to_file("res://assets/scenes/menu.tscn")
+		Events.game_over.emit()
+		self.visible = false

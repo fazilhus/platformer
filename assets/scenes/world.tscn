@@ -1,12 +1,16 @@
-[gd_scene load_steps=11 format=3 uid="uid://d1hhdwj75cvda"]
+[gd_scene load_steps=15 format=3 uid="uid://d1hhdwj75cvda"]
 
 [ext_resource type="Script" path="res://scripts/parallax_background.gd" id="1_dcg36"]
 [ext_resource type="PackedScene" uid="uid://b5ohbya0rbr7j" path="res://assets/Player/player.tscn" id="1_hrua5"]
 [ext_resource type="Texture2D" uid="uid://em7kwb634ud7" path="res://art/oak_woods_tileset.png" id="1_mndvi"]
+[ext_resource type="Script" path="res://scripts/world.gd" id="1_x4ocg"]
 [ext_resource type="Texture2D" uid="uid://dfeeo88vcp468" path="res://art/background/background_layer_1.png" id="2_f7xx3"]
 [ext_resource type="Texture2D" uid="uid://cpedxrntm7oyp" path="res://art/background/background_layer_2.png" id="3_4q3p1"]
 [ext_resource type="Texture2D" uid="uid://dofnkbj2bsq14" path="res://art/background/background_layer_3.png" id="4_j2mbc"]
+[ext_resource type="PackedScene" uid="uid://drfkuck601k1l" path="res://assets/ui/game_over.tscn" id="7_eufws"]
 [ext_resource type="PackedScene" uid="uid://bniclvbh2xuuh" path="res://assets/spikes.tscn" id="7_kxowe"]
+[ext_resource type="PackedScene" uid="uid://tgpme2ahslg2" path="res://assets/collectible_area.tscn" id="8_gli4k"]
+[ext_resource type="PackedScene" uid="uid://b2icrf5btj2lk" path="res://assets/ui/level_completed.tscn" id="8_vmtcf"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_6a172"]
 texture = ExtResource("1_mndvi")
@@ -618,6 +622,7 @@ func _process(_delta):
 "
 
 [node name="World" type="Node2D"]
+script = ExtResource("1_x4ocg")
 
 [node name="TileMap" type="TileMap" parent="."]
 tile_set = SubResource("TileSet_p6my6")
@@ -658,10 +663,14 @@ centered = false
 
 [node name="UI" type="CanvasLayer" parent="."]
 
+[node name="GameOver" parent="UI" instance=ExtResource("7_eufws")]
+
 [node name="Label" type="Label" parent="UI"]
 offset_right = 40.0
 offset_bottom = 23.0
 script = SubResource("GDScript_b4ina")
+
+[node name="LevelCompleted" parent="UI" instance=ExtResource("8_vmtcf")]
 
 [node name="Player" type="Node2D" parent="."]
 
@@ -680,3 +689,14 @@ position = Vector2(552, 314)
 
 [node name="Spikes3" parent="Hazards" instance=ExtResource("7_kxowe")]
 position = Vector2(576, 314)
+
+[node name="Collectibles" type="Node2D" parent="."]
+position = Vector2(530, 128)
+
+[node name="Heart" parent="Collectibles" instance=ExtResource("8_gli4k")]
+
+[node name="CollectibleArea" parent="." instance=ExtResource("8_gli4k")]
+position = Vector2(389, 197)
+
+[node name="CollectibleArea2" parent="." instance=ExtResource("8_gli4k")]
+position = Vector2(39, 231)

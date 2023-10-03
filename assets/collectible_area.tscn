@@ -1,0 +1,22 @@
+[gd_scene load_steps=4 format=3 uid="uid://tgpme2ahslg2"]
+
+[ext_resource type="Script" path="res://scripts/collectible_area.gd" id="1_buewu"]
+[ext_resource type="Texture2D" uid="uid://vnix45jkr2au" path="res://art/heart.png" id="1_qo8il"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_41ymv"]
+radius = 9.0
+
+[node name="CollectibleArea" type="Area2D" groups=["Hearts"]]
+collision_layer = 0
+collision_mask = 2
+script = ExtResource("1_buewu")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_qo8il")
+centered = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(8, 6)
+shape = SubResource("CircleShape2D_41ymv")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
