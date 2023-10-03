@@ -95,3 +95,9 @@ func apply_friction(delta, input_axis):
 			self.velocity.x = move_toward(self.velocity.x, 0, movement_data.friction * delta)
 		else:
 			self.velocity.x = move_toward(self.velocity.x, 0, movement_data.air_resistance * delta)
+
+
+func _on_hazard_detection_area_entered(area):
+	if area.name == "HazardArea":
+		# TODO Health component
+		get_tree().change_scene_to_file("res://assets/scenes/menu.tscn")

@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=3 uid="uid://bniclvbh2xuuh"]
+
+[ext_resource type="Texture2D" uid="uid://cdpikls8qfcgj" path="res://art/spikes.png" id="1_my504"]
+[ext_resource type="PackedScene" uid="uid://clalbj5x6pg32" path="res://assets/hazard_area.tscn" id="2_y6riq"]
+
+[node name="Spikes" type="Node2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_my504")
+centered = false
+
+[node name="HazardArea" parent="." instance=ExtResource("2_y6riq")]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="HazardArea"]
+position = Vector2(12, 12)
+scale = Vector2(1.2, 1.2)
+polygon = PackedVector2Array(-10, -6.66667, -9.16667, -6.66667, -9.16667, -7.5, -8.33333, -7.5, -8.33333, -8.33333, -7.5, -8.33333, -7.5, -9.16667, -6.66667, -9.16667, -6.66667, -10, -5.83333, -10, -5.83333, -9.16667, -5, -9.16667, -5, -8.33333, -4.16667, -8.33333, -4.16667, -7.5, -3.33333, -7.5, -3.33333, -6.66667, -2.5, -6.66667, -2.5, -7.5, -1.66667, -7.5, -1.66667, -8.33333, -0.833334, -8.33333, -0.833334, -9.16667, 0, -9.16667, 0, -10, 0.833333, -10, 0.833333, -9.16667, 1.66667, -9.16667, 1.66667, -8.33333, 2.5, -8.33333, 2.5, -7.5, 3.33333, -7.5, 3.33333, -6.66667, 4.16667, -6.66667, 4.16667, -7.5, 5, -7.5, 5, -8.33333, 5.83333, -8.33333, 5.83333, -9.16667, 6.66667, -9.16667, 6.66667, -10, 7.5, -10, 7.5, -9.16667, 8.33333, -9.16667, 8.33333, -8.33333, 9.16667, -8.33333, 9.16667, -7.5, 10, -7.5, 10, 10, -10, 10)
