@@ -551,5 +551,5 @@ libraries = {
 }
 
 [node name="CoyoteJumpTimer" type="Timer" parent="."]
-wait_time = 0.12
+wait_time = 0.1
 one_shot = true

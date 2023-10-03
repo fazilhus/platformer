@@ -57,7 +57,7 @@ func handle_jump():
 	if is_on_floor() or coyote_jump_timer.time_left > 0.0:
 		if Input.is_action_just_pressed("jump"):
 			self.velocity.y = movement_data.jump_velocity
-	if not is_on_floor():
+	elif not is_on_floor():
 		if Input.is_action_just_released("jump") and self.velocity.y < movement_data.jump_velocity / 2:
 			self.velocity.y = movement_data.jump_velocity / 2
 			
